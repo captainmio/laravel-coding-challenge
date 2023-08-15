@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Services\Products\GetProductService;
 use App\Services\Products\GetProductsService;
 use App\Services\Products\StoreProductService;
+use App\Services\Products\DeleteProductService;
 use App\Services\Products\UpdateProductService;
 
 class ProductsController extends Controller
@@ -59,5 +60,11 @@ class ProductsController extends Controller
       
 
       return $return;
+    }
+
+    public function destroy($id, DeleteProductService $deleteProductService) {
+      $deleteProductService->execute($id);
+
+      return response()->json(['success' => true]);
     }
 }
